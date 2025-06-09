@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import { sql } from './config/db.js';
+import RateLimiter from './middleware/RateLimiter.js';
 dotenv.config();
 const PORT = process.env.PORT || 5111;
 
@@ -23,6 +24,7 @@ const initDB = async () => {
 }
 
 const app = express();
+app.use(RateLimiter) // Use the RateLimiter Middleware.
 app.use(express.json());
 
 app.get("/",(req,res)=>{
@@ -95,7 +97,7 @@ app.get("/api/transactions/summary/:userId", async (req,res)=>{
         
         const balanceResult = await sql`
             SELECT COALESCE(SUM(amount),0) AS balance 
-            FROM balance FROM transactions WHERE user_id=${userId}
+            FROM transactions WHERE user_id=${userId}
         `;
         
         const incomeResult = await sql`
@@ -106,7 +108,7 @@ app.get("/api/transactions/summary/:userId", async (req,res)=>{
         
         const expenseResult = await sql`
             SELECT COALESCE(SUM(amount),0) AS expense 
-            FROM balance FROM transactions WHERE user_id=${userId}
+            FROM transactions WHERE user_id=${userId}
             AND amount<0
         `;
         
@@ -117,7 +119,7 @@ app.get("/api/transactions/summary/:userId", async (req,res)=>{
         });
 
     }catch(e){
-        console.log("Error at endpoint: /api/transactions/sumary/", err);
+        console.log("Error at endpoint: /api/transactions/sumary/", e);
         res.status(500).json({message:"Internal server error."});
     }
 })

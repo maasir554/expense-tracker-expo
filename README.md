@@ -7,6 +7,7 @@ This is a fullstack expense-tracker cross-platform mobile application.
 - No ORM used, only the using Raw SQL.
 - taggged template litral to call function
 - Clerk user management platform for managing auth and related stuff.
+- Upstash Redis serverless rate limiter implemented.
 ### new concept learnt 
 1. Tagged template litral function call
 ```js

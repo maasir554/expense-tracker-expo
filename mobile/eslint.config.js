@@ -6,5 +6,7 @@ module.exports = defineConfig([
   expoConfig,
   {
     ignores: ['dist/*'],
+    baseUrl: ".",
+    paths:{"@/*":["*"]}
   },
 ]);

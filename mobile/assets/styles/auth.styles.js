@@ -9,9 +9,9 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   illustration: {
-    width: "100%",
+    width: 300,
     height: 310,
-    resizeMode: "contain",
+    contentFit: "contain",
   },
   title: {
     fontSize: 32,
@@ -65,7 +65,8 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
     padding: 20,
-    justifyContent: "center",
+    paddingTop:50,
+    justifyContent: "start",
     alignItems: "center",
   },
   verificationTitle: {
